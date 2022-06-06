@@ -1,14 +1,31 @@
 package racingcar;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
 public class Car {
 
     private CarName carName;
     private CarDistance carDistance;
 
     public Car(String name) {
-        carName = new CarName(name);
-        carDistance = new CarDistance();
+        this.carName = new CarName(name);
+        this.carDistance = new CarDistance();
+    }
+
+    public void move(int random) {
+        if(random >= 4) {
+            this.carDistance.move();
+        }
+    }
+
+    public String getName() {
+        return this.carName.getName();
+    }
+
+    public int getDistance() {
+        return this.carDistance.getDistance();
+    }
+
+    public String getDisplayDis() {
+        return this.carName.getName() + " : "
+                + this.carDistance.getDisplayDis();
     }
 }

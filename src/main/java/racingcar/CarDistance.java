@@ -1,13 +1,9 @@
 package racingcar;
 
 public class CarDistance {
-    private int distance;
-    private String displayDis;
+    private int distance = 0;
+    private String displayDis = "";
 
-    public void initDistance() {
-        this.distance = 0;
-        this.displayDis = "";
-    }
 
     public void move() {
         this.distance++;
@@ -16,5 +12,9 @@ public class CarDistance {
 
     public String getDisplayDis() {
         return this.displayDis;
+    }
+
+    public int getDistance() {
+        return this.distance;
     }
 }
