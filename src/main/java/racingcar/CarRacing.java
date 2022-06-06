@@ -5,12 +5,14 @@ import common.CommonCode;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.List;
 
 public class CarRacing {
     private CarGenerator carGenerator;
     List<Integer> distance = new ArrayList<>();
     String winners = "";
+    int count;
 
     public void racing() {
         initCar();
@@ -28,7 +30,7 @@ public class CarRacing {
 
     public void startRacing(int gameCount) {
         System.out.println("실행 결과");
-        while(gameCount > 0){
+        while(gameCount > 0) {
             gameCount--;
             this.carGenerator.carMove();
             System.out.println(System.lineSeparator());
@@ -54,7 +56,7 @@ public class CarRacing {
     }
 
     public void validateError(boolean y) {
-        if(y) initCar();
+        if(y) racing();
     }
 
     public String inputName() {
@@ -63,13 +65,21 @@ public class CarRacing {
     }
 
     public int inputCount() {
-        System.out.println(CommonCode.INPUT_ROUND_COUNT_MESSAGE.getMessage());
-        int number;
         try {
-            number = Integer.parseInt(Console.readLine());
-        } catch (IllegalArgumentException e){
+            System.out.println(CommonCode.INPUT_ROUND_COUNT_MESSAGE.getMessage());
+            String count = Console.readLine();
+            validateNumeric(count);
+        } catch (IllegalArgumentException e) {
+            validateError(String.valueOf(e).matches(".*[ERROR].*"));
+        }
+        return this.count;
+    }
+
+    public void validateNumeric(String count) {
+        try {
+            this.count = Integer.parseInt(count);
+        } catch (InputMismatchException e) {
             throw new IllegalArgumentException(CommonCode.INPUT_INTEGER_ERR.getMessage());
         }
-        return number;
     }
 }
